@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "target": "es5",
+        "sourceMap": true,
+        "declaration": false,
+        "strict": true, 
+        "allowSyntheticDefaultImports": true,
+    },  
+    "files": [
+        "src/main.ts"
+    ],
+    "include": [
+        "src/**/*.d.ts"
+    ]
+}

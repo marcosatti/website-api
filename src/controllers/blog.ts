@@ -1,12 +1,26 @@
 import { Request, Response } from "express";
+import { makeConnection } from "../database/connection";
+import { defineBlog } from "../database/models";
 
-function index_controller(request: Request, response: Response) {
-    response.send("Hello world!");
+async function index_controller(request: Request, response: Response) {
+    let session = makeConnection();
+    let Blog = defineBlog(session);
+    let attributes = ["id", "title", "timestamp"];
+    let blogs = await Blog.findAll({ attributes });
+    response.send(blogs);
 }
 
-function blog_controller(request: Request, response: Response) {
-    const id = request.params.id;
-    response.send(`Hello world! ${id}`);
+async function blog_controller(request: Request, response: Response) {
+    let id = request.params.id;
+    let session = makeConnection();
+    let Blog = defineBlog(session);
+    let blog = await Blog.findOne({ where: { id } });
+
+    if (blog) {
+        response.send(blog);
+    } else {
+        response.status(404).send("Blog not found");
+    }
 }
 
 export let controller = {

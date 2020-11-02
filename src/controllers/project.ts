@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-function index_controller(request: Request, response: Response) {
+async function index_controller(request: Request, response: Response) {
     response.send("Hello world!");
 }
 

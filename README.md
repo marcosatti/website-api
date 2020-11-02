@@ -22,3 +22,10 @@ docker build -t website-api .
 ```
 docker run -it --rm -p 32780:80 website-api
 ```
+
+### Environment Variables Used
+
+- PORT
+- DB_HOST
+- DB_PORT
+- DB_PASSWORD

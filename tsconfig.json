@@ -4,8 +4,7 @@
         "target": "es5",
         "sourceMap": true,
         "declaration": false,
-        "strict": true, 
-        "allowSyntheticDefaultImports": true,
+        "strict": true
     },  
     "files": [
         "src/main.ts"

@@ -14,7 +14,17 @@ async function blog_controller(request: Request, response: Response) {
     let id = request.params.id;
     let session = makeConnection();
     let Blog = defineBlog(session);
-    let blog = await Blog.findOne({ where: { id } });
+
+    let blog = null;
+    if (id === "latest") {
+        blog = await Blog.findOne({
+            order: [["timestamp", "DESC"]],
+        });
+    } else {
+        blog = await Blog.findOne({ 
+            where: { id } 
+        });
+    }
 
     if (blog) {
         response.send(blog);

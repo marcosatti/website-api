@@ -25,7 +25,8 @@ docker run -it --rm -p 32780:80 website-api
 
 ### Environment Variables Used
 
-- PORT
+- NODE_ENV (default: "production")
+- PORT (default: "80")
 - DB_HOST
 - DB_PORT
 - DB_PASSWORD

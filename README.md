@@ -30,3 +30,4 @@ docker run -it --rm -p 32780:80 website-api
 - DB_HOST
 - DB_PORT
 - DB_PASSWORD
+- FRONTEND_URL

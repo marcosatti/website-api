@@ -1,8 +1,16 @@
-FROM debian:bullseye-slim
+FROM debian:buster-slim
 
-RUN apt-get -y update
-RUN apt-get -y upgrade
-RUN apt-get -y install --no-install-recommends nodejs npm
+RUN apt-get update && apt-get -y install --no-install-recommends \
+    ca-certificates \
+    curl \
+    nginx-light \ 
+    lsb-release \
+    gnupg
+
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+
+RUN apt-get update && apt-get -y install --no-install-recommends \
+    nodejs
 
 WORKDIR /app
 

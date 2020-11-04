@@ -14,4 +14,4 @@ RUN npm run build
 ENV NODE_ENV=production
 ENV PORT=80
 
-CMD [ "/bin/bash", "-c", "npm run start" ]
+CMD [ "/bin/bash", "cmd.sh" ]

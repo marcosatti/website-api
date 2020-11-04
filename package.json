@@ -10,7 +10,10 @@
     "private": true,
     "license": "GPL-3.0-or-later",
     "dependencies": {
+        "@types/cors": "^2.8.8",
+        "cors": "^2.8.5",
         "express": "^4.17.1",
+        "express-async-handler": "^1.1.4",
         "pg": "^8.4.2",
         "pg-hstore": "^2.3.3",
         "sequelize": "^6.3.5"

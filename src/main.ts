@@ -1,15 +1,9 @@
 import * as express from "express";
 import * as cors from "cors";
-import { env } from "process";
 import { router } from "./routes/api";
 
-const port = env.PORT;
-const frontend_url = env.FRONTEND_URL;
-
-if (!port) {
-    console.error("No PORT environment variable defined");
-    process.exit(1);
-}
+const port = process.env.PORT;
+const frontend_url = process.env.FRONTEND_URL;
 
 let app = express();
 

@@ -31,3 +31,5 @@ docker run -it --rm -p 32780:80 website-api
 - DB_PORT
 - DB_PASSWORD
 - FRONTEND_URL
+- GITHUB_PAT
+- GITHUB_USERNAME

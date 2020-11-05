@@ -1,16 +1,18 @@
 import { Request, Response } from "express";
 import { makeConnection } from "../database/connection";
 import { defineBlog } from "../database/models";
+import { Blog } from "../common/types/blog";
 
-async function index_controller(request: Request, response: Response) {
+async function index_controller(request: Request, response: Response<Blog[]>) {
     let session = makeConnection();
-    let Blog = defineBlog(session);
+    let BlogModel = defineBlog(session);
     let attributes = ["id", "title", "timestamp"];
-    let blogs = await Blog.findAll({ attributes });
-    response.send(blogs);
+    let blogs = await BlogModel.findAll({ attributes });
+    let jsonBlogs = blogs.map((blog) => blog.toJSON() as Blog)
+    response.json(jsonBlogs);
 }
 
-async function blog_controller(request: Request, response: Response) {
+async function blog_controller(request: Request, response: Response<Blog | string>) {
     let id = request.params.id;
     let session = makeConnection();
     let Blog = defineBlog(session);
@@ -27,7 +29,7 @@ async function blog_controller(request: Request, response: Response) {
     }
 
     if (blog) {
-        response.send(blog);
+        response.send(blog.toJSON() as Blog);
     } else {
         response.status(404).send("Blog not found");
     }

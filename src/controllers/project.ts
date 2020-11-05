@@ -6,7 +6,7 @@ const GITHUB_API_URL = "https://api.github.com/graphql";
 const GITHUB_QUERY = `
     query($username: String!, $cursor: String) {
         user(login: $username) {
-            repositories(orderBy: {field: UPDATED_AT, direction: DESC}, privacy: PUBLIC, first: 10, after: $cursor) {
+            repositories(orderBy: {field: UPDATED_AT, direction: DESC}, privacy: PUBLIC, first: 10, after: $cursor, isFork: false) {
                 pageInfo {
                     hasNextPage
                 }
@@ -17,6 +17,7 @@ const GITHUB_QUERY = `
                         description
                         pushedAt
                         openGraphImageUrl
+                        usesCustomOpenGraphImage
                         url
                     }
                 }
@@ -75,11 +76,16 @@ async function query_github_paginated(cursor: string | null): Promise<GitHubPagi
 }
 
 function makeProject(edgeNode: any) {
+    let imageUrl = null;
+    if (edgeNode["usesCustomOpenGraphImage"]) {
+        imageUrl = edgeNode["openGraphImageUrl"];
+    }
+
     return {
         title: edgeNode["name"],
         description: edgeNode["description"],
         lastUpdated: edgeNode["pushedAt"],
-        imageUrl: edgeNode["openGraphImageUrl"],
+        imageUrl: imageUrl,
         url: edgeNode["url"]
     }
 }

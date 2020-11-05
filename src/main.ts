@@ -18,11 +18,11 @@ app.use(cors())
 app.use("/api/v1", router);
 
 if (frontend_url) {
-    app.get("/", (request, response) => {
+    app.use((request, response) => {
         response.redirect(frontend_url);
     });
 } else {
-    console.warn("No FRONTEND_URL environment variable defined, skipping root redirect");
+    console.warn("No FRONTEND_URL environment variable defined, skipping redirection");
 }
 
 app.listen(port, () => { 

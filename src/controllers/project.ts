@@ -5,18 +5,20 @@ import { Project } from "../common/types/project";
 const GITHUB_API_URL = "https://api.github.com/graphql";
 const GITHUB_QUERY = `
     query($username: String!, $cursor: String) {
-        repositories(orderBy: {field: UPDATED_AT, direction: DESC}, privacy: PUBLIC, first: 10, after: $cursor) {
-            pageInfo {
-                hasNextPage
-            }
-            edges {
-                cursor
-                node {
-                    name
-                    description
-                    pushedAt
-                    openGraphImageUrl
-                    url
+        user(login: $username) {
+            repositories(orderBy: {field: UPDATED_AT, direction: DESC}, privacy: PUBLIC, first: 10, after: $cursor) {
+                pageInfo {
+                    hasNextPage
+                }
+                edges {
+                    cursor
+                    node {
+                        name
+                        description
+                        pushedAt
+                        openGraphImageUrl
+                        url
+                    }
                 }
             }
         }
